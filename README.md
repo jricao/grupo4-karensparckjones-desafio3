@@ -1,3 +1,14 @@
-<h1> Grupo: karen sparck jones </h1>
+# DESAFIO 3 - CONSTRUDELAS 2022 (.NET)
 
-- Desafio 3
+## Descrição
+
+Em breve.
+
+## Grupo: Karen Sparck Jones
+
+- Anne Caroline
+- Ingrid Wagner
+- Jéssica Ricão
+- Jéssica Campos
+- Mayara Alfonso
+- Tais Nazaré
