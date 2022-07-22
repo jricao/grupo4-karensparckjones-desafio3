@@ -9,6 +9,6 @@ Em breve.
 - Anne Caroline
 - Ingrid Wagner
 - Jéssica Ricão
-- Jéssica Campos
+- Jéssica Campos Conceição
 - Mayara Alfonso
 - Tais Nazaré
