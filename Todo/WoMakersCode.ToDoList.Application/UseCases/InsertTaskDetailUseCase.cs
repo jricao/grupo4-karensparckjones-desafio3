@@ -12,10 +12,10 @@ namespace WoMakersCode.ToDoList.Application.UseCases
 {
     public class InsertTaskDetailUseCase : IUseCaseAsync<TaskRequest, TaskResponse>
     {
-        private readonly IRepository _todoListRepository;
+        private readonly ITaskDetailRepository _todoListRepository;
         private readonly IMapper _mapper;
 
-        public InsertTaskDetailUseCase(IRepository todoListRepository, IMapper mapper)
+        public InsertTaskDetailUseCase(ITaskDetailRepository todoListRepository, IMapper mapper)
         {
             _todoListRepository = todoListRepository;
             _mapper = mapper;

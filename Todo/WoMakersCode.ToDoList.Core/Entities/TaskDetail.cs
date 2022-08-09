@@ -15,5 +15,6 @@ namespace WoMakersCode.ToDoList.Core.Entities
         public bool Executado { get; set; }
         public TaskList TaskList { get; set; }
         public int IdTaskList { get; set; }
+        public List<Alarm> Alarms { get; set; }
     }
 }

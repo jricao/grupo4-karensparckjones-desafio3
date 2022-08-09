@@ -11,23 +11,46 @@ using WoMakersCode.ToDoList.Infra.Repositories;
 
 namespace WoMakersCode.ToDoList.Application.UseCases
 {
-    public class InsertTodoListUseCase : IUseCaseAsync<TaskListRequest, TaskListResponse>
+    public class InsertTodoListUseCase : IUseCaseAsync<TaskListRequest, InsertToDoListResponse>
     {
-        private readonly IRepository _todoListRepository;
+        private readonly ITaskListRepository _repository;
         private readonly IMapper _mapper;
 
-        public InsertTodoListUseCase(IRepository todoListRepository, IMapper mapper)
+        public InsertTodoListUseCase(ITaskListRepository repository, IMapper mapper)
         {
-            _todoListRepository = todoListRepository;
+            _repository = repository;
             _mapper = mapper;
         }
 
-        public Task<TaskListResponse> ExecuteAsync(TaskListRequest request)
+        public async Task<InsertToDoListResponse> ExecuteAsync(TaskListRequest request)
         {
-            var taskList = _mapper.Map<TaskList>(request);
+            var resp = await _repository.GetById(new Core.Filters.GetFilter { Pesquisa = request.ListName });
 
-            _todoListRepository.Inserir(taskList);
-            return Task.FromResult(new TaskListResponse());
+            if (resp == null)
+            {
+                var taskList = _mapper.Map<TaskList>(request);
+                await _repository.Insert(taskList);
+                return new InsertToDoListResponse();
+            }
+            else
+                return null;
         }
+        //public Task<TaskListResponse> ExecuteAsync(TaskListRequest request)
+        //{
+        //    var taskList = _mapper.Map<TaskList>(request);
+        //    //CRIAR VARIÁVEL QUE DIZ AO CONTROLLER SE É IGUAL OU NÃO. nO CONTROLLER CASO NÃO SEJA, INSERE A LISTA
+        //    var resposta = _todoListRepository.Inserir(taskList);
+        //    var response = (TaskList)null;
+        //    //se request(objeto do tipo TLRq ?) !=
+        //    //if (request.ListName.Equals(TaskListResponse))
+        //    if (resposta != TaskListResponse.ListName)//como comparar com o nome de outras listas já inseridas? PARA VERIFICAR SE É DIFERENTE?
+        //        response = new TaskListResponse
+        //        {
+        //            Id = resposta.Id,
+        //            ListName = resposta.ListName
+        //        };
+
+        //    return Task.FromResult(response);
+        //}
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,6 +17,8 @@ using WoMakersCode.ToDoList.Application.Mappings;
 using WoMakersCode.ToDoList.Application.Models;
 using WoMakersCode.ToDoList.Application.UseCases;
 using WoMakersCode.ToDoList.Core.DTOs;
+using WoMakersCode.ToDoList.Core.Entities;
+using WoMakersCode.ToDoList.Core.Filters;
 using WoMakersCode.ToDoList.Core.Repositories;
 using WoMakersCode.ToDoList.Core.Services;
 using WoMakersCode.ToDoList.Infra.Database;
@@ -36,14 +39,26 @@ namespace WoMakersCode.ToDoList
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IUseCaseAsync<TaskListRequest, TaskListResponse>, InsertTodoListUseCase>();
-            services.AddTransient<IUseCaseAsync<int, TaskListResponse>, GetTodoListUseCase>();
-            services.AddTransient<IUseCaseAsync<TaskRequest, TaskResponse>, InsertTaskDetailUseCase>();
-            services.AddTransient<IRepository, ToDoListRepository>();
-            services.AddTransient<ApplicationContext>();
-            services.AddAutoMapper(typeof(MappingProfile));
-            services.AddTransient<IWeatherService, WeatherService>();
+            services.AddScoped<ITaskListRepository, TaskListRepository>(); //novo
+            services.AddScoped<IAlarmRepository, AlarmRepository>();    //novo        
+            services.AddScoped<ITaskDetailRepository, ToDoListRepository>();       //ver se tá certo pro insert task detail ou se seri abaixo:     
+            // services.AddTransient<IRepository, ToDoListRepository>();
+            services.AddScoped<IUseCaseAsync<TaskListRequest, List<TaskListResponse>>, GetAllTaskListUseCase>();//novo
+            services.AddScoped<IUseCaseAsync<GetFilter, GetByIdResponse>, GetByIdUseCase>();//ok
+            services.AddScoped<IUseCaseAsync<TaskListRequest, InsertToDoListResponse>, InsertTodoListUseCase >(); //ok
+            services.AddScoped<IUseCaseAsync<List<InsertAlarmRequest>, InsertAlarmResponse>, InsertAlarmUseCase>();//novo
+            services.AddTransient<IUseCaseAsync<TaskRequest, TaskResponse>, InsertTaskDetailUseCase>();//ok
+            
+            
+            //services.AddTransient<ApplicationContext>();
+            services.AddAutoMapper(typeof(MappingProfile));//ok
+            services.AddDbContext<ApplicationContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
+             );
+            services.AddTransient<IWeatherService, WeatherService>();//descomentados p tentar o getWe
             services.AddTransient<IUseCaseAsync<string, WeatherDTO>, GetWeatherForecastUseCase>();
+            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -52,7 +67,7 @@ namespace WoMakersCode.ToDoList
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,ApplicationContext context)
         {
             if (env.IsDevelopment())
             {
@@ -60,6 +75,7 @@ namespace WoMakersCode.ToDoList
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WoMakersCode.ToDoList v1"));
             }
+            context.Database.Migrate();
 
             app.UseHttpsRedirection();
 
@@ -72,5 +88,32 @@ namespace WoMakersCode.ToDoList
                 endpoints.MapControllers();
             });
         }
+
+
+
+
+
+
+
+        /* public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+         {
+             if (env.IsDevelopment())
+             {
+                 app.UseDeveloperExceptionPage();
+                 app.UseSwagger();
+                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WoMakersCode.ToDoList v1"));
+             }
+
+             app.UseHttpsRedirection();
+
+             app.UseRouting();
+
+             app.UseAuthorization();
+
+             app.UseEndpoints(endpoints =>
+             {
+                 endpoints.MapControllers();
+             })
+         }*/
     }
 }

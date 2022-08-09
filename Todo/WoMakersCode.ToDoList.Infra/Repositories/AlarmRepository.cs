@@ -9,29 +9,17 @@ using WoMakersCode.ToDoList.Infra.Database;
 
 namespace WoMakersCode.ToDoList.Infra.Repositories
 {
-   // public class ToDoListRepository : IRepository<TaskDetail>
-    public class ToDoListRepository : ITaskDetailRepository
+    public class AlarmRepository : IAlarmRepository
     {
         private readonly ApplicationContext _context;
-
-        public ToDoListRepository(ApplicationContext context)
+        public AlarmRepository(ApplicationContext context)
         {
             _context = context;
         }
-
-
-        public Task InserirTask(TaskDetail taskDetail)
+        public async Task InsertAlarm(List<Alarm> alarm)
         {
-            _context.Add(taskDetail);
-
-            _context.SaveChanges();
-
-            return Task.CompletedTask;
+            _context.AddRange(alarm);
+            await _context.SaveChangesAsync();
         }
-
-
-  }
+    }
 }
-
-
-

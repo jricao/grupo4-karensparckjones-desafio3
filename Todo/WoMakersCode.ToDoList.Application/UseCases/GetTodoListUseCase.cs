@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using WoMakersCode.ToDoList.Application.Models;
 using WoMakersCode.ToDoList.Core.Repositories;
-
+/* APAGAR
 namespace WoMakersCode.ToDoList.Application.UseCases
 {
     public class GetTodoListUseCase : IUseCaseAsync<int, TaskListResponse>
@@ -30,4 +30,4 @@ namespace WoMakersCode.ToDoList.Application.UseCases
             return Task.FromResult(response);
         }
     }
-}
+}*/
