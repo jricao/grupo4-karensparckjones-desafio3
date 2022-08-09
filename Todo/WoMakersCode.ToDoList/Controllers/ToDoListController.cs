@@ -1,16 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WoMakersCode.ToDoList.Application.Models;
 using WoMakersCode.ToDoList.Application.UseCases;
-using Microsoft.AspNetCore.Mvc.Core;
-using Microsoft.AspNetCore.Mvc.Abstractions;
 using WoMakersCode.ToDoList.Core.DTOs;
-using WoMakersCode.ToDoList.Core.Entities;
-using WoMakersCode.ToDoList.Core.Repositories;
 using WoMakersCode.ToDoList.Core.Filters;
 
 namespace WoMakersCode.ToDoList.Controllers
@@ -79,10 +72,12 @@ namespace WoMakersCode.ToDoList.Controllers
         }
 
         
-        [HttpPost("task")]//AQUI PRECISA: "Ajuste os retornos do controller para utilizar ActionResult."  
-        public async Task<TaskResponse> PostTask([FromBody] TaskRequest request)
+        [HttpPost("task")]  
+        public async Task<ActionResult<TaskResponse>> PostTask([FromBody] TaskRequest request)
         {
-            return await _insertTaskDetailUseCase.ExecuteAsync(request);
+            var resposta= await _insertTaskDetailUseCase.ExecuteAsync(request);
+            return Ok(resposta);
+
         }
 
         [HttpGet("weatherforcast")]
@@ -93,44 +88,7 @@ namespace WoMakersCode.ToDoList.Controllers
             return new OkObjectResult(response);
         }
 
-        /* 
-        private readonly ILogger<ToDoListController> _logger;
-        private readonly IUseCaseAsync<TaskListRequest, TaskListResponse> _insertUseCase;
-        private readonly IUseCaseAsync<int, TaskListResponse> _getUseCase;
-        private readonly IUseCaseAsync<TaskRequest, TaskResponse> _insertTaskDetailUseCase;
-        private readonly IUseCaseAsync<string, WeatherDTO> _getWeatherForecastUseCase;
-        
        
-
-        public ToDoListController(ILogger<ToDoListController> logger,
-            IUseCaseAsync<TaskRequest, TaskResponse> insertTaskDetailUseCase,
-            IUseCaseAsync<string, WeatherDTO> getWeatherForecastUseCase
-        
-        {
-            _logger = logger;
-            
-            _insertTaskDetailUseCase = insertTaskDetailUseCase;
-            _getWeatherForecastUseCase = getWeatherForecastUseCase;
-           
-
-        }*/
-
-        //PRECISA: "Ajuste os retornos do controller para utilizar ActionResult."  
-        //[HttpPost("task")]
-        //public async Task<TaskResponse> PostTask([FromBody] TaskRequest request)
-        //{
-        //    return await _insertTaskDetailUseCase.ExecuteAsync(request);
-        //}
-
-        //[HttpGet("weatherforcast")]
-        //public async Task<ActionResult<WeatherDTO>> GetWeatherForcast()
-        //{
-        //    var response = await _getWeatherForecastUseCase.ExecuteAsync(string.Empty);
-
-        //    return new OkObjectResult(response);
-        //}
-
-
     }
 
 }

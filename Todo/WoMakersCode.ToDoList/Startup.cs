@@ -39,10 +39,9 @@ namespace WoMakersCode.ToDoList
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<ITaskListRepository, TaskListRepository>(); //novo
+            services.AddScoped<ITaskListRepository, TaskListRepository>(); 
             services.AddScoped<IAlarmRepository, AlarmRepository>();    //novo        
-            services.AddScoped<ITaskDetailRepository, ToDoListRepository>();       //ver se tá certo pro insert task detail ou se seri abaixo:     
-            // services.AddTransient<IRepository, ToDoListRepository>();
+            services.AddScoped<ITaskDetailRepository, ToDoListRepository>();       
             services.AddScoped<IUseCaseAsync<TaskListRequest, List<TaskListResponse>>, GetAllTaskListUseCase>();//novo
             services.AddScoped<IUseCaseAsync<GetFilter, GetByIdResponse>, GetByIdUseCase>();//ok
             services.AddScoped<IUseCaseAsync<TaskListRequest, InsertToDoListResponse>, InsertTodoListUseCase >(); //ok
@@ -50,13 +49,13 @@ namespace WoMakersCode.ToDoList
             services.AddTransient<IUseCaseAsync<TaskRequest, TaskResponse>, InsertTaskDetailUseCase>();//ok
             
             
-            //services.AddTransient<ApplicationContext>();
+            
             services.AddAutoMapper(typeof(MappingProfile));//ok
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                 .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
              );
-            services.AddTransient<IWeatherService, WeatherService>();//descomentados p tentar o getWe
+            services.AddTransient<IWeatherService, WeatherService>();
             services.AddTransient<IUseCaseAsync<string, WeatherDTO>, GetWeatherForecastUseCase>();
             
             services.AddControllers();
@@ -95,25 +94,5 @@ namespace WoMakersCode.ToDoList
 
 
 
-        /* public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-         {
-             if (env.IsDevelopment())
-             {
-                 app.UseDeveloperExceptionPage();
-                 app.UseSwagger();
-                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WoMakersCode.ToDoList v1"));
-             }
-
-             app.UseHttpsRedirection();
-
-             app.UseRouting();
-
-             app.UseAuthorization();
-
-             app.UseEndpoints(endpoints =>
-             {
-                 endpoints.MapControllers();
-             })
-         }*/
     }
 }
