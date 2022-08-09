@@ -43,7 +43,6 @@ namespace WoMakersCode.ToDoList.Application.Mappings
             CreateMap<InsertAlarmRequest, Alarm>()
                 .ForMember(dest => dest.DataHora, fonte => fonte.MapFrom(src => src.DataHora))
                 .ForMember(dest => dest.IdTaskDetail, fonte => fonte.MapFrom(src => src.IdTaskDetail));
-
         }
     }
 }

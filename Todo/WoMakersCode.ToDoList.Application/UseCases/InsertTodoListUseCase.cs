@@ -35,22 +35,5 @@ namespace WoMakersCode.ToDoList.Application.UseCases
             else
                 return null;
         }
-        //public Task<TaskListResponse> ExecuteAsync(TaskListRequest request)
-        //{
-        //    var taskList = _mapper.Map<TaskList>(request);
-        //    //CRIAR VARIÁVEL QUE DIZ AO CONTROLLER SE É IGUAL OU NÃO. nO CONTROLLER CASO NÃO SEJA, INSERE A LISTA
-        //    var resposta = _todoListRepository.Inserir(taskList);
-        //    var response = (TaskList)null;
-        //    //se request(objeto do tipo TLRq ?) !=
-        //    //if (request.ListName.Equals(TaskListResponse))
-        //    if (resposta != TaskListResponse.ListName)//como comparar com o nome de outras listas já inseridas? PARA VERIFICAR SE É DIFERENTE?
-        //        response = new TaskListResponse
-        //        {
-        //            Id = resposta.Id,
-        //            ListName = resposta.ListName
-        //        };
-
-        //    return Task.FromResult(response);
-        //}
     }
 }

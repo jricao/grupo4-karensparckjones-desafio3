@@ -2,7 +2,7 @@
 
 ## Descrição
 
-Em breve.
+Este projeto se refere ao módulo de backend do Bootcamp ConstruDelas 2022. Foi realizado pelo grupo "Karen Sparck Jones", tratando-se de um CRUD em uma aplicação em .NET 5 que manipula listas de tarefas.
 
 ## Grupo: Karen Sparck Jones
 
@@ -12,3 +12,9 @@ Em breve.
 - Jéssica Campos Conceição
 - Mayara Alfonso
 - Tais Nazaré
+
+## Ferramentas
+
+- EF Core
+- Swagger
+- AutoMapper

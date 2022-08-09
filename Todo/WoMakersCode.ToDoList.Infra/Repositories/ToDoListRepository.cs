@@ -9,7 +9,6 @@ using WoMakersCode.ToDoList.Infra.Database;
 
 namespace WoMakersCode.ToDoList.Infra.Repositories
 {
-   // public class ToDoListRepository : IRepository<TaskDetail>
     public class ToDoListRepository : ITaskDetailRepository
     {
         private readonly ApplicationContext _context;
@@ -19,7 +18,6 @@ namespace WoMakersCode.ToDoList.Infra.Repositories
             _context = context;
         }
 
-
         public Task InserirTask(TaskDetail taskDetail)
         {
             _context.Add(taskDetail);
@@ -28,10 +26,5 @@ namespace WoMakersCode.ToDoList.Infra.Repositories
 
             return Task.CompletedTask;
         }
-
-
-  }
+    }
 }
-
-
-

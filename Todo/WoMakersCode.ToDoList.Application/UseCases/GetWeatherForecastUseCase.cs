@@ -7,7 +7,7 @@ using WoMakersCode.ToDoList.Core.DTOs;
 using WoMakersCode.ToDoList.Core.Services;
 
 namespace WoMakersCode.ToDoList.Application.UseCases
-{ //é conexao com API externa. FAZ MAPEAMENTO???SE SIM, COMO?
+{
     public class GetWeatherForecastUseCase : IUseCaseAsync<string, WeatherDTO>
     {
         public readonly IWeatherService _weatherService;

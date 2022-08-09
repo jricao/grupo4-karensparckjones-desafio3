@@ -36,7 +36,7 @@ namespace WoMakersCode.ToDoList.Controllers
         }
 
         [HttpGet("All")]
-        public async Task<ActionResult<List<TaskListResponse>>> Get([FromQuery] TaskListRequest request)//poderia tirar a necessidade de parâmetro?
+        public async Task<ActionResult<List<TaskListResponse>>> Get([FromQuery] TaskListRequest request)
         {
             return await _getAllUseCase.ExecuteAsync(request);
         }
@@ -49,7 +49,6 @@ namespace WoMakersCode.ToDoList.Controllers
                 return new NotFoundObjectResult("Não encontrado");
 
             return new OkObjectResult(response);
-
         }
 
         [HttpPost]
@@ -61,7 +60,6 @@ namespace WoMakersCode.ToDoList.Controllers
                 return Ok(resposta);
             else
                 return new BadRequestObjectResult("Lista já existente");
-
         }
 
         [HttpPost("insertAlarm")]
@@ -87,9 +85,5 @@ namespace WoMakersCode.ToDoList.Controllers
 
             return new OkObjectResult(response);
         }
-
-       
     }
-
 }
-

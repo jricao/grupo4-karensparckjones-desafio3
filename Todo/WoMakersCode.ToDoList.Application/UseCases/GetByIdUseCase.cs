@@ -22,7 +22,6 @@ namespace WoMakersCode.ToDoList.Application.UseCases
             _mapper = mapper;
         }
 
-
         public  Task<GetByIdResponse> ExecuteAsync(GetFilter filter)
         {
             var resposta = _repository.GetById(filter).Result;
@@ -35,23 +34,6 @@ namespace WoMakersCode.ToDoList.Application.UseCases
             }
 
             return Task.FromResult(response);
-
         }
-
-        
-
-        //public Task<TaskDetail> ExecuteAsync(int request)
-        //{
-        //    var resultado = _todoListRepository.GetTaskDetails(request);
-        //    List<TaskDetail> listas = new List<TaskDetail>();
-        //    if (listas.Any() == true)                          //se tem algum elemento na lista,retorna a lista
-        //        resultado = new List<TaskDetail>();
-        //    else
-        //        resultado = null;
-
-        //    return (Task<TaskDetail>)resultado; //pq precisaria ser assim?
-        //}
-
-
     }
 }

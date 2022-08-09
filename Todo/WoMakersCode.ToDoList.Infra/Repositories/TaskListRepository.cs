@@ -13,7 +13,7 @@ namespace WoMakersCode.ToDoList.Infra.Repositories
 {
     public class TaskListRepository : ITaskListRepository
     {
-        private readonly ApplicationContext _context;//a ligação com o BD
+        private readonly ApplicationContext _context;
 
         public TaskListRepository(ApplicationContext context)
         {
@@ -46,7 +46,7 @@ namespace WoMakersCode.ToDoList.Infra.Repositories
 
             return await result
                 .AsNoTracking()
-                .FirstOrDefaultAsync(); //Vai no banco e busca = materializacao de busca
+                .FirstOrDefaultAsync();
         }
 
         public async Task Insert(TaskList taskList)
@@ -56,4 +56,3 @@ namespace WoMakersCode.ToDoList.Infra.Repositories
         }
     }
 }
-

@@ -6,11 +6,5 @@ namespace WoMakersCode.ToDoList.Core.Repositories
 {
     public interface IRepository<T>
     {
-        //apagar:
-       // Task Inserir(TaskList taskList);
-        //Task<TaskList> GetTaskList(int id);
-        //Task InserirTask(TaskDetail taskDetail);
-             
-
     }
 }

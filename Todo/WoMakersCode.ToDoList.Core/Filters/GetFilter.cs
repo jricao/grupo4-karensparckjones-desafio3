@@ -10,7 +10,5 @@ namespace WoMakersCode.ToDoList.Core.Filters
     {
         public int Id { get; set; }
         public string Pesquisa { get; set; }
-
-
     }
 }

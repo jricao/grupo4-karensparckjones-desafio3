@@ -40,17 +40,17 @@ namespace WoMakersCode.ToDoList
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ITaskListRepository, TaskListRepository>(); 
-            services.AddScoped<IAlarmRepository, AlarmRepository>();    //novo        
-            services.AddScoped<ITaskDetailRepository, ToDoListRepository>();       
-            services.AddScoped<IUseCaseAsync<TaskListRequest, List<TaskListResponse>>, GetAllTaskListUseCase>();//novo
-            services.AddScoped<IUseCaseAsync<GetFilter, GetByIdResponse>, GetByIdUseCase>();//ok
-            services.AddScoped<IUseCaseAsync<TaskListRequest, InsertToDoListResponse>, InsertTodoListUseCase >(); //ok
-            services.AddScoped<IUseCaseAsync<List<InsertAlarmRequest>, InsertAlarmResponse>, InsertAlarmUseCase>();//novo
-            services.AddTransient<IUseCaseAsync<TaskRequest, TaskResponse>, InsertTaskDetailUseCase>();//ok
+            services.AddScoped<IAlarmRepository, AlarmRepository>();
+            services.AddScoped<ITaskDetailRepository, ToDoListRepository>();
+            services.AddScoped<IUseCaseAsync<TaskListRequest, List<TaskListResponse>>, GetAllTaskListUseCase>();
+            services.AddScoped<IUseCaseAsync<GetFilter, GetByIdResponse>, GetByIdUseCase>();
+            services.AddScoped<IUseCaseAsync<TaskListRequest, InsertToDoListResponse>, InsertTodoListUseCase >();
+            services.AddScoped<IUseCaseAsync<List<InsertAlarmRequest>, InsertAlarmResponse>, InsertAlarmUseCase>();
+            services.AddTransient<IUseCaseAsync<TaskRequest, TaskResponse>, InsertTaskDetailUseCase>();
             
             
             
-            services.AddAutoMapper(typeof(MappingProfile));//ok
+            services.AddAutoMapper(typeof(MappingProfile));
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                 .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
@@ -87,12 +87,5 @@ namespace WoMakersCode.ToDoList
                 endpoints.MapControllers();
             });
         }
-
-
-
-
-
-
-
     }
 }
