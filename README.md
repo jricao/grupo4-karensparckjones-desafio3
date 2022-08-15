@@ -18,3 +18,4 @@ Este projeto se refere ao módulo de backend do Bootcamp ConstruDelas 2022. Foi 
 - EF Core
 - Swagger
 - AutoMapper
+- SQL Server
