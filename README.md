@@ -10,10 +10,10 @@ Este projeto se refere ao módulo de backend do Bootcamp ConstruDelas 2022. Foi 
 - Ingrid Wagner
 - Jéssica Ricão
 - Jéssica Campos Conceição
-- Mayara Alfonso
+- Mayra Eliana Alfonso
 - Tais Nazaré
 
-## Ferramentas
+## Pacotes e Ferramentas
 
 - EF Core
 - Swagger
