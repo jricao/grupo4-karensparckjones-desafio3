@@ -13,8 +13,9 @@ Este projeto se refere ao módulo de backend do Bootcamp ConstruDelas 2022. Foi 
 - Mayra Eliana Alfonso
 - Tais Nazaré
 
-## Ferramentas
+## Pacotes e Ferramentas
 
 - EF Core
 - Swagger
 - AutoMapper
+- SQL Server
